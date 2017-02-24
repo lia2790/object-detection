@@ -1,0 +1,141 @@
+#include <string>
+#include <iostream>
+#include <fstream>
+#include <sstream>
+
+#include <ros/ros.h>
+
+#include <mrpt/base.h>
+#include <mrpt/poses/CPose2D.h>
+#include <mrpt/poses/CPoint2D.h>
+#include <mrpt/poses/CPose3D.h>
+#include <mrpt/poses/CPoint3D.h>
+#include <mrpt/poses/CPose3DQuat.h>
+
+#include <math.h>
+
+
+using namespace std;
+using namespace mrpt::poses;
+using namespace mrpt::math;
+using namespace mrpt::utils;
+
+
+
+CPose3D board1(0, 0, -0.036, DEG2RAD(0.0), DEG2RAD(0.0), DEG2RAD(100) ); // x y z - yaw_z pitch_y roll_x
+
+CPose3DQuat board1_ = CPose3DQuat(board1);
+
+
+		double tx = board1_.m_coords[0];	//  array_traslation t=tx,ty,tz
+		double ty = board1_.m_coords[1];
+		double tz = board1_.m_coords[2];
+		double qw = board1_.m_quat[0];		// array_quaterion
+		double qx = board1_.m_quat[1];
+		double qy = board1_.m_quat[2];
+		double qz = board1_.m_quat[3];	
+
+double z_yaw_rad;
+double y_pitch_rad;
+double x_roll_rad;
+
+
+double z_yaw_grad;
+double y_pitch_grad;
+double x_roll_grad;
+
+
+//0.920629 0.214823 0.23292 0.09432
+
+CPose3DQuat pose_quat(0.0,0.0,0.0,CQuaternionDouble(0.920629, 0.214823, 0.23292, 0.09432)); //x_y_z qw_qx_qy_qz
+
+
+CPose3D pose_eul_ZYX = pose_quat;
+
+
+
+double z_yaw_rad_pose;
+double y_pitch_rad_pose;
+double x_roll_rad_pose;
+
+
+double z_yaw_grad_pose;
+double y_pitch_grad_pose;
+double x_roll_grad_pose;
+
+
+		double tx_pose = pose_quat.m_coords[0];	//  array_traslation t=tx,ty,tz
+		double ty_pose = pose_quat.m_coords[1];
+		double tz_pose = pose_quat.m_coords[2];
+		double qw_pose = pose_quat.m_quat[0];		// array_quaterion  
+		double qx_pose = pose_quat.m_quat[1];
+		double qy_pose = pose_quat.m_quat[2];
+		double qz_pose = pose_quat.m_quat[3];	
+
+
+
+
+
+int main(int argc, char** argv)
+{
+ 
+	//inizializzazione nodo 
+	ros::init(argc, argv, "EULquat");// ROS node
+   ros::NodeHandle nn;
+
+
+	board1.getYawPitchRoll(z_yaw_rad, y_pitch_rad, x_roll_rad); //radianti
+
+	
+	z_yaw_grad = z_yaw_rad * (180/M_PI);
+	y_pitch_grad = y_pitch_rad * (180/M_PI);
+	x_roll_grad = x_roll_rad * (180/M_PI);
+	
+
+	cout<<"-------------- CONVERSIONE DA EUL ZYX_yaw_pitch_roll a QUAT--------"<<endl;
+	cout<<"z_yaw_rad = "<<z_yaw_rad<<" y_pitch_rad = "<<y_pitch_rad<<" x_roll_rad = "<<x_roll_rad<<endl;    //radianti
+	cout<<"z_yaw_grad = "<<z_yaw_grad<<" y_pitch_grad = "<<y_pitch_grad<<" x_roll_grad = "<<x_roll_grad<<endl; //gradi
+	cout<<"qw ="<<qw<<" qx ="<<qx<<" qy ="<<qy<<" qz ="<<qz<<endl; // quaternione
+	cout<<"tx ="<<tx<<" ty ="<<ty<<" tz = "<<tz<<endl;  // traslazione
+	cout<<"________________________________________________________________"<<endl;
+
+
+
+/////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
+
+	pose_eul_ZYX.getYawPitchRoll(z_yaw_rad_pose, y_pitch_rad_pose, x_roll_rad_pose); //radianti
+
+	
+	z_yaw_grad_pose = z_yaw_rad_pose * (180/M_PI);
+	y_pitch_grad_pose = y_pitch_rad_pose * (180/M_PI);
+	x_roll_grad_pose = x_roll_rad_pose * (180/M_PI);
+	
+
+	cout<<"-------------- CONVERSIONE DA QUAT a EUL ZYX_yaw_pitch_roll --------"<<endl;
+	cout<<"z_yaw_rad_pose = "<<z_yaw_rad_pose<<endl;
+	cout<<"y_pitch_rad_pose = "<<y_pitch_rad_pose<<endl;
+	cout<<"x_roll_rad_pose = "<<x_roll_rad_pose<<endl; //radianti
+	cout<<"z_yaw_grad_pose = "<<z_yaw_grad_pose<<endl;
+	cout<<"y_pitch_grad_pose = "<<y_pitch_grad_pose<<endl;
+	cout<<"x_roll_grad_pose = "<<x_roll_grad_pose<<endl; //gradi
+	cout<<"qw_pose ="<<qw_pose<<" qx_pose ="<<qx_pose<<" qy_pose ="<<qy_pose<<" qz_pose ="<<qz_pose<<endl;
+	cout<<"tx_pose ="<<tx_pose<<" ty_pose ="<<ty_pose<<" tz_pose = "<<tz_pose<<endl;	
+	cout<<"________________________________________________________________"<<endl;
+
+
+
+
+
+
+	ros::Rate loop_rate(100);
+
+
+	while(nn.ok())
+	{	
+		loop_rate.sleep();
+	}
+
+
+}

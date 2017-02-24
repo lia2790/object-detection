@@ -1,0 +1,33 @@
+#include <fstream>
+#include <sstream>
+#include <iostream>
+#include <math.h>
+#include <cstdio>
+#include <opencv2/calib3d/calib3d.hpp>
+#include <opencv2/highgui/highgui.hpp>
+#include <opencv2/imgproc/imgproc.hpp>
+#include "markerdetector.h"
+#include "cvdrawingutils.h"
+
+using namespace std;
+
+namespace mid
+{
+
+class ObjectTracking
+{
+
+	public :
+
+		
+		ObjectTracking();
+		
+		~ObjectTracking() {}
+
+		void setValue(std::string filename, float Mark_size, cv::Mat InImage);
+
+		void ObjectPose(MarkerDetector &MDetector,cv::Mat Img);
+
+};
+
+}

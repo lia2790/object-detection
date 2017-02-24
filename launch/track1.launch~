@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<launch>
+
+	
+	
+
+	<!-- <node name="fly_cap_pub_node" pkg="object_detection" type="fly_cap_pub" respawn="false" output="screen"/> 
+	<node name="obj_pose_in_the_world_node" pkg="object_detection" type="obj_pose_in_the_world" respawn="false" output="screen"/> 	
+   -->	
+	<node name="Kalman_node1" pkg="object_detection" type="Kalman" respawn="false" output="screen">
+	<rosparam file="$(find object_detection)/param/Tuning_Kalman1.yaml" command="load"/>
+	</node>
+
+</launch>
+
+
+

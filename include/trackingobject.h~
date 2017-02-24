@@ -1,0 +1,62 @@
+#include <fstream>
+#include <sstream>
+#include <iostream>
+#include <math.h>
+#include <cstdio>
+#include <opencv2/calib3d/calib3d.hpp>
+#include <opencv2/highgui/highgui.hpp>
+#include <opencv2/imgproc/imgproc.hpp>
+#include "markerdetector.h"
+#include "cvdrawingutils.h"
+
+using namespace std;
+
+namespace mid
+{
+
+class ObjectTracking
+{
+
+	public :
+		cv::Mat InImage;//input image
+		cv::Mat TheInputImageCopy;//copy the input image for manipulate
+
+		mid::CameraParameters CamParam;//use the pinhole camera model
+//camera value of intrinsics matrix obtained with opencv calibration example with chessboard
+		MarkerDetector MDetector;//marker find in image processing
+		vector< Marker > Markers;//marker candidate
+		float MarkerSize = -1;//size of marker side
+
+
+		ObjectTracking();
+		
+		ObjectTracking(const ObjectTracking);
+
+		~Marker() {}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+}
+
+}

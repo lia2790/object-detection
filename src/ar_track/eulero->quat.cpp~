@@ -1,0 +1,56 @@
+#include <ros/ros.h>
+#include <image_transport/image_transport.h>
+#include <arpa/inet.h>
+
+
+#include <string>
+#include <iostream>
+#include <fstream>
+#include <sstream>
+#include <tf/transform_broadcaster.h>
+#include <geometry_msgs/PoseStamped.h>
+#include <geometry_msgs/Pose.h>
+
+
+
+#include <mrpt/base.h>
+#include <mrpt/poses/CPose2D.h>
+#include <mrpt/poses/CPoint2D.h>
+#include <mrpt/poses/CPose3D.h>
+#include <mrpt/poses/CPoint3D.h>
+#include <mrpt/poses/CPose3DQuat.h>
+
+
+using namespace std;
+using namespace mrpt::poses;
+using namespace mrpt::math;
+using namespace mrpt::utils;
+
+
+
+
+
+
+
+int main(int argc, char** argv)
+{
+ 
+	CPose3D board1(0, 0, -0.036, DEG2RAD(0.0), DEG2RAD(0.0), DEG2RAD(0.0) );
+
+CPose3DQuat board1_ = CPose3DQuat(board1);
+
+
+		double tx1 = board1_.m_coords[0];	//  array_traslation t=tx,ty,tz
+		double ty1 = board1_.m_coords[1];
+		double tz1 = board1_.m_coords[2];
+		double qw1 = board1_.m_quat[0];		// array_quaterion
+		double qx1 = board1_.m_quat[1];
+		double qy1 = board1_.m_quat[2];
+		double qz1 = board1_.m_quat[3];	
+
+
+	system("pause"); 
+
+	return 0;
+
+}

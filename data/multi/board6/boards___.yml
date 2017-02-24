@@ -1,0 +1,8 @@
+%YAML:1.0
+ar_sys_boards:
+   - { name:"/board1x8", path:"board1x8.yml", marker_size:0.015 }
+   - { name:"/board2x8", path:"board2x8.yml", marker_size:0.015 }
+   - { name:"/board3x8", path:"board3x8.yml", marker_size:0.015 }
+   - { name:"/board4x8", path:"board4x8.yml", marker_size:0.015 }
+   - { name:"/board5x8", path:"board5x8.yml", marker_size:0.015 }
+   - { name:"/board6x8", path:"board6x8.yml", marker_size:0.015 }

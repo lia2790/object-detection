@@ -1,0 +1,4 @@
+ObjectTracker:
+ filename_camera: 'param/camera_calibration.yml'
+ size_marker: 0.016 
+

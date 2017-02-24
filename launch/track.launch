@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<launch>
+
+	
+	<rosparam file="$(find object_detection)/param/Tuning_Kalman.yaml" command="load"/>
+
+	<node name="Kalman_node" pkg="object_detection" type="Kalman" respawn="false" output="screen"/>
+
+
+</launch>
+
+
+

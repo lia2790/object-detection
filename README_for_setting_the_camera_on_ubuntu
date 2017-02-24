@@ -1,0 +1,90 @@
+
+
+FOR CAMERA 
+
+Configuring the Operating System and Installing the Required Libraries
+To run FlyCapture2 on a Linux Ubuntu system, install the following dependencies:
+
+libraw1394-8
+libgtkmm-2.4-dev
+libglademm-2.4-dev
+libgtkglextmm-x11-dev (libgtkglextmm-x11-1.2-dev in Ubuntu 8.10 and newer)
+libusb-1.0 (Ubuntu 9.04 and newer)
+
+
+
+To install the FlyCapture2 SDK:
+
+Download FlyCapture2 SDK from the Point Grey Downloads webpage. You will need a downloads account to access the Download links.
+Unpack the software in the directory where you want to install it. There are ten packages:
+libflycapture-<version>_<platorm>.deb
+libflycapture-<version>_<platorm>-dev.deb
+libflycapturegui-<version>_<platorm>.deb
+libflycapturegui-<version>_<platorm>-dev.deb
+libflycapture-c-<version>_<platorm>.deb
+libflycapture-c-<version>_<platorm>-dev.deb
+libflycapturegui-c-<version>_<platorm>.deb
+libflycapturegui-c-<version>_<platorm>-dev.deb
+flycap-<version>_<platorm>.deb
+flycapture-doc-<version>_<platform>.deb
+The packages with a preceding 'lib' are all the shared objects and their respective dev packages.
+The flycap package installs the capture application which can be launched by entering 'flycap' in a terminal
+or through the applications menu. The flycapture-doc package contains Point Grey documentation in pdf format.
+
+Run the install script in the same directory into which you unpacked the software. 
+user$ sudo sh install_flycapture.sh
+Follow the instructions of the script. This installs all the FlyCapture2 libraries, example code, sample applications, and documentation.
+
+The script prompts you to configure udev so that devices can be used by a particular user.
+If you choose to configure devices, the script changes permissions on the nodes by overwriting the default
+Ubuntu permissions and giving the user full read and write access to the device nodes.
+Restart your computer for the user permissions to take effect.
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+IMPORTANT
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+Configuring USBFS
+
+
+By default, Linux limits image capture to 2 MB. 
+To capture images over 2 MB, extend the USBFS limit 
+on how many buffers can be locked into the driver. 
+This is done by updating the boot params in grub.
+You can set the memory limit until the next reboot, or set it permanently.
+
+To set the maximum usbfs memory limit until the next reboot, run this command:
+$ sudo modprobe usbcore usbfs_memory_mb=1000
+
+%%%%%%%%%%%%    ATTENTION     %%%%%%%%%%%%%%%%%%%%%%%
+This method does not work with Ubuntu 14.04 or newer. 
+With Ubuntu 14.04, users must set the memory limit permanently.
+
+To set the maximum usbfs memory limit permanently:
+1. Open the /etc/default/grub file in any text editor. 
+
+Find and replace:
+
+GRUB_CMDLINE_LINUX_DEFAULT="quiet splash"
+
+with this:
+
+GRUB_CMDLINE_LINUX_DEFAULT="quiet splash usbcore.usbfs_memory_mb=1000"
+
+2. Update grub with these settings:
+
+$ sudo update-grub
+
+3. Reboot and test a USB 3.0 camera.
+
+If this method fails to set the memory limit, run the following command:
+
+$ sudo sh -c 'echo 1000 > /sys/module/usbcore/parameters/usbfs_memory_mb'
+To confirm that you have successfully updated the memory limit, run the following command:
+
+cat /sys/module/usbcore/parameters/usbfs_memory_mb
+

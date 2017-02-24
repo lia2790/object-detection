@@ -1,0 +1,51 @@
+1. FILE CMAKELISTS.TXT
+
+Esso permette di compilare un programma.
+Al suo interno vengono incluse tutte le librerie necessarie.
+Se queste non vengono trovate all'interno del sistema, 
+verrano generati appositi errori di compilazione.
+
+2. FILE PACKAGE.XML
+
+In esso vengono definite le proprietà relative al pacchetto
+come il nome, la versione e molto importante le dipendenze con altri
+pacchetti del sistema.
+
+3. CARTELLA DATA
+
+contiene due sottocartelle:
+
+MULTI : contiene 6 file di configurazione, e le immagini relative alle board.
+
+			5 file denominati:
+
+			-board1x8.yml
+			-board2x8.yml
+			-board3x8.yml
+			-board4x8.yml
+			-board5x8.yml
+
+			ciascuno di essi descrive la configurazione delle board che verranno
+		   riconosciute dal programma multi-board.
+			In ogni file viene inserito:
+			
+			1. il numero di marker facente parte di quella board
+			2. l'id di ciascun marker 
+			3. la posizione che ciascun marker occupa nella board  
+								per la precisione, 
+								la posizione è espressa in termini dei suoi angoli.
+
+			un file:
+
+			-boards.yml 
+
+			che contiene tre informazioni:
+			
+			1. il nome di ciascuna board che sarà utilizzato come nome
+					del frame solidale alla board.
+			2. il path delle cartelle dove questi file sono contenuti.
+			3. la lunghezza del lato del marker. 
+
+
+
+			
